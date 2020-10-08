@@ -37,35 +37,35 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   fetchToyInfo();
 
-  const createToys = () => {
-    let nInput = document.getElementsByName("name")
-    const newToyName = nInput[0].value
-    
-    let imageInput = document.getElementsByName("image")
-    const newToyImage = imageInput[0].value
- 
-
-    const options = {
-      method: "POST",
-      headers: {
-      "content-type": "application/json",
-      "accept": "application/json"
-      },
-      body: JSON.stringify({
-        "name": newToyName,
-        "image": newToyImage,
-        "likes": 0
-      })
-    }
-    fetch("http://localhost:3000/toys", options)
-    .then(response => response.json())
-    .then(toy => renderToy(toy))
-  }
-
   let newToyBtn = document.getElementsByName("submit")
   const addNewToyBtn = newToyBtn[0]
-  addNewToyBtn.addEventListener("click", () => {
-    
+  
+  addNewToyBtn.addEventListener("click", e => {
+    e.preventDefault()
+
+    const createToys = () => {
+      let nInput = document.getElementsByName("name")
+      const newToyName = nInput[0].value
+      
+      let imageInput = document.getElementsByName("image")
+      const newToyImage = imageInput[0].value
+      
+      const options = {
+        method: "POST",
+        headers: {
+        "content-type": "application/json",
+        "accept": "application/json"
+        },
+        body: JSON.stringify({
+          "name": newToyName,
+          "image": newToyImage,
+          "likes": 0
+        })
+      }
+      fetch("http://localhost:3000/toys", options)
+      .then(response => response.json())
+      .then(toy => renderToy(toy))
+    }
   })
 
 
