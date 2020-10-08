@@ -17,13 +17,14 @@ document.addEventListener("DOMContentLoaded", () => {
         img.classList.add('toy-avatar')
         div.append(img)
 
-        // let p = document.createElement('p')
-        // p.innerText = json[toy]['name']
-        // div.append(p)
-        //
-        // let button = document.createElement('button')
-        // button.innerText = json[toy]['name']
-        // div.append(button)
+        let p = document.createElement('p')
+        p.innerText = json[toy]['likes'] + " Likes"
+        div.append(p)
+
+        let button = document.createElement('button')
+        button.innerText = "Like <3"
+        button.classList.add('like-btn')
+        div.append(button)
 
       toyCollection = document.getElementById('toy-collection')
       toyCollection.append(div)
@@ -42,4 +43,28 @@ document.addEventListener("DOMContentLoaded", () => {
       toyFormContainer.style.display = "none";
     }
   });
+
+  const toyForm = document.querySelector('.add-toy-form')
+  toyForm.addEventListener('submit', function(e) {
+    // e.preventDefault()
+    const form = e.target
+    const toyName = form.name.value
+    const toyPic = form.image.value
+
+    fetch('http://localhost:3000/toys', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        name: toyName,
+        image: toyPic
+      })
+    })
+
+  })
+
+
+
 });
