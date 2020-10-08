@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const toyForm = document.querySelector('.add-toy-form')
   toyForm.addEventListener('submit', function(e) {
-    // e.preventDefault()
+    e.preventDefault()
     const form = e.target
     const toyName = form.name.value
     const toyPic = form.image.value
@@ -59,12 +59,42 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       body: JSON.stringify({
         name: toyName,
-        image: toyPic
+        image: toyPic,
+        likes: 0
       })
     })
+    .then(function(response){
+      return response.json()
+    })
+    .then(function(toy){
+      let div = document.createElement('div')
+        div.classList.add('card')
+        let h2 = document.createElement('h2')
+        h2.innerText = toy['name']
+        div.append(h2)
 
-  })
+        let img = document.createElement('img')
+        img.src= toy['image']
+        img.classList.add('toy-avatar')
+        div.append(img)
 
+        let p = document.createElement('p')
+        p.innerText = toy['likes'] + " Likes"
+        div.append(p)
+
+        let button = document.createElement('button')
+        button.innerText = "Like <3"
+        button.classList.add('like-btn')
+        div.append(button)
+
+        toyCollection = document.getElementById('toy-collection')
+        toyCollection.append(div)
+    })
+
+  // const likeBtn = document.querySelector('.like-btn')
+  // likeBtn.addEventListener('click', function{})
+
+})
 
 
 });
