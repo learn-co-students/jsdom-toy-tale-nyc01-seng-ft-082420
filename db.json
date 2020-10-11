@@ -71,6 +71,12 @@
       "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
       "likes": 0,
       "id": 12
+    },
+    {
+      "name": "Jessie",
+      "image": "https://vignette.wikia.nocookie.net/disney/images/1/11/Profile_-_Jessie.jpeg/revision/latest/scale-to-width-down/516?cb=20190313152740",
+      "likes": 0,
+      "id": 13
     }
   ]
 }

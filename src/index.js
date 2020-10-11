@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let button = document.createElement('button')
         button.innerText = "Like <3"
         button.classList.add('like-btn')
+        button.setAttribute('id', json[toy]['id'])
         div.append(button)
 
       toyCollection = document.getElementById('toy-collection')
@@ -84,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let button = document.createElement('button')
         button.innerText = "Like <3"
+        button.setAttribute('id', toy.id)
         button.classList.add('like-btn')
         div.append(button)
 
@@ -91,10 +93,31 @@ document.addEventListener("DOMContentLoaded", () => {
         toyCollection.append(div)
     })
 
-  // const likeBtn = document.querySelector('.like-btn')
-  // likeBtn.addEventListener('click', function{})
 
-})
 
+  })
+
+  document.addEventListener('click', function(e){
+    if (e.target.matches('.like-btn')){
+      likeCount = parseInt(e.target.previousElementSibling.innerText) + 1
+      fetch('http://localhost:3000/toys/${e.target.id}', {
+        method: 'PATCH',
+        headers: {
+          "Content-Type" : "application/json",
+          "Accept" : "application/json"
+        },
+        body: JSON.stringify({
+          "likes": likeCount
+        })
+      })
+      .then(function(response){
+        return response.json()
+      })
+      .then(function(json){
+        e.target.previousElementSibling.innerText = `${likeCount} likes`;
+      })
+
+    }
+  })
 
 });
