@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
         options = {
           method: "PATCH",
           headers: {
-            "content-type": "application/json"
+            "content-type": "application/json",
             "accept": "application/json"
           },
           body: JSON.stringify({ likes: newLikes })
